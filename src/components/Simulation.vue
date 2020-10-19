@@ -159,10 +159,48 @@
   import { IParameters } from 'components/Parameters.vue';
 
   export interface IVectorEstado {
-    id: string, // @todo don't store, calculate row-key based on source, time and event
+    id: number, // @todo don't store, calculate row-key based on source, time and event
     reloj: number,
-    evento: number,
-    emisor: any, // @todo of type client, server or system
+    evento: string,
+    numeroPedido: number,
+    proximoPedido: number,
+    pedido: {
+      tipoProducto: string
+      cantidadPedida: number
+      tiempoEntrePedidos: number
+      llegadaProximoPedido: number
+    }
+    colaPedidosAPreparar: number,
+    stockMiga: number,
+    stockPizza: number,
+    stockHamburguesa: number,
+    stockLomito: number,
+    stockEmpanadas: number,
+    servidorEmpleado1: {
+      estado: string
+      numeroPedido: number
+      tiempoPreparacion: number
+      proximoFinAtencion: number
+    }
+    servidorEmpleado2: {
+      estado: string
+      numeroPedido: number
+      tiempoPreparacion: number
+      proximoFinAtencion: number
+    }
+    servidorEmpleado3: {
+      estado: string
+      numeroPedido: number
+      tiempoPreparacion: number
+      proximoFinAtencion: number
+    }
+    colaPedidosAEntregar: number,
+    servidorDelivery: {
+      estado: string
+      pedidosAEntregar: number[]
+      tiempoEntrega: number
+      proximoFinEntrega: number
+    }
   }
 
   export type TReplica = IVectorEstado[];
@@ -189,7 +227,6 @@
       (value * 100).toFixed(0),
     )
   } %`;
-
   function useSimulation(props: { parameters: IParameters }) {
     const state = reactive({
       iteraciones: 100000,
@@ -200,6 +237,13 @@
           name: 'reloj',
           label: 'Reloj',
           field: (row: IVectorEstado) => row.reloj,
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'evento',
+          label: 'Evento',
+          field: (row: IVectorEstado) => row.evento,
           align: 'right',
           required: true,
         },
