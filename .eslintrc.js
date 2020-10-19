@@ -56,6 +56,7 @@ module.exports = {
     'brace-style': ['error', 'stroustrup', {
       allowSingleLine: true,
     }],
+    'linebreak-style': 'off',
     'lines-between-class-members': ['error', 'always', {
       exceptAfterSingleLine: true,
     }],
