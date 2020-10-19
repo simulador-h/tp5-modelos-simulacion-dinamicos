@@ -91,7 +91,7 @@ module.exports = {
     }],
 
     // TypeScript
-    '@typescript-eslint/no-shadow': 'error',
+    // '@typescript-eslint/no-shadow': 'error',
 
     // Imports
     'import/default': 'error',

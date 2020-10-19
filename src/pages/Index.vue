@@ -7,7 +7,6 @@
       <q-btn push color="white" text-color="primary" label="Lucas Astrada" />
       <q-btn push color="white" text-color="primary" label="Tatiana Candusso" />
       <q-btn push color="white" text-color="primary" label="Rodrigo Gonzalez" />
-      <q-btn push color="white" text-color="primary" label="Lucas Pellis" />
       <q-btn push color="white" text-color="primary" label="Ana Mickaela Pizarro" />
     </div>
   </q-page>
