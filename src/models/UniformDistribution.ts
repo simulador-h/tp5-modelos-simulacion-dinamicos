@@ -1,3 +1,5 @@
+import { jStat } from 'jstat';
+
 import {
   TDistributionParameters,
   TDistributionValidators,
@@ -31,6 +33,7 @@ export class UniformDistribution extends ProbabilityDistribution {
     parameters: IUniformParameters = defaultParameters,
     validators: IUniformValidators = defaultValidators,
   ) {
-    super('uniform', parameters, validators);
+    const generator = ({ a, b }: TDistributionParameters) => jStat.uniform(a, b).sample();
+    super('uniform', parameters, validators, generator);
   }
 }

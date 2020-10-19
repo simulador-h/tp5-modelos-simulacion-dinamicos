@@ -1,3 +1,5 @@
+import { jStat } from 'jstat';
+
 import {
   TDistributionParameters,
   TDistributionValidators,
@@ -31,6 +33,7 @@ export class NormalDistribution extends ProbabilityDistribution {
     parameters: INormalParameters = defaultParameters,
     validators: INormalValidators = defaultValidators,
   ) {
-    super('normal', parameters, validators);
+    const generator = ({ mean, std }: TDistributionParameters) => jStat.normal(mean, std).sample();
+    super('normal', parameters, validators, generator);
   }
 }

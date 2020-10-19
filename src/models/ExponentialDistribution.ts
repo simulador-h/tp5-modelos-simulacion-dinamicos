@@ -1,3 +1,5 @@
+import { jStat } from 'jstat';
+
 import {
   TDistributionParameters,
   TDistributionValidators,
@@ -27,6 +29,7 @@ export class ExponentialDistribution extends ProbabilityDistribution {
     parameters: IExponentialParameters = defaultParameters,
     validators: IExponentialValidators = defaultValidators,
   ) {
-    super('exponential', parameters, validators);
+    const generator = ({ rate }: TDistributionParameters) => jStat.exponential(rate).sample();
+    super('exponential', parameters, validators, generator);
   }
 }

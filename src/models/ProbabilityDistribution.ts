@@ -4,6 +4,7 @@ import { es } from 'helpers/locale';
 
 export type TDistributionParameters = Record<string, number>;
 export type TDistributionValidators = Record<string, Array<(value: number) => true | string>>;
+export type TDistributionGenerator = (parameters: TDistributionParameters) => number;
 
 /**
  * @todo aggregate all parameter-related properties into a single parameter-object definition
@@ -14,15 +15,18 @@ export class ProbabilityDistribution {
   public readonly type: string;
   public parameters: TDistributionParameters;
   public readonly validators: TDistributionValidators;
+  public generator: TDistributionGenerator;
 
   constructor(
     type: string,
     parameters: TDistributionParameters = {},
     validators: TDistributionValidators = {},
+    generator: TDistributionGenerator = () => NaN,
   ) {
     this.type = type;
     this.parameters = _.cloneDeep(parameters);
     this.validators = validators;
+    this.generator = generator;
   }
 
   getReadableParameters(locale = es): string {
@@ -34,8 +38,12 @@ export class ProbabilityDistribution {
     return stringParameters.join('  ~  ');
   }
 
-  clone() {
+  clone(): ProbabilityDistribution {
     return new ProbabilityDistribution(this.type, this.parameters, this.validators);
+  }
+
+  sample(): number {
+    return this.generator(this.parameters);
   }
 }
 

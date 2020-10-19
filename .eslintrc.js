@@ -52,6 +52,9 @@ module.exports = {
       'props': false,
     }],
 
+    // Variables
+    'no-shadow': 'off',
+
     // Stylistic Issues
     'brace-style': ['error', 'stroustrup', {
       allowSingleLine: true,
@@ -86,6 +89,9 @@ module.exports = {
         'consistent': true,
       },
     }],
+
+    // TypeScript
+    '@typescript-eslint/no-shadow': 'error',
 
     // Imports
     'import/default': 'error',
