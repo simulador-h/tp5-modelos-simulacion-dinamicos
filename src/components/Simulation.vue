@@ -158,10 +158,23 @@
 
   import { IParameters } from 'components/Parameters.vue';
 
+  enum Evento {
+    InicioSimulacion = 'Inicio Simulación',
+    FinSimulacion = 'Fin Simulación',
+
+    InicioTurno = 'Inicio Turno',
+    FinTurno = 'Fin Turno',
+
+    LlegadaPedido = 'Llegada Pedido',
+    AbandonoPedido = 'Abandono Pedido',
+    FinPreparacionPedido = 'Fin Preparación Pedido',
+    FinEntregaPedido = 'Fin Entrega Pedido',
+  }
+
   export interface IVectorEstado {
     id: number, // @todo don't store, calculate row-key based on source, time and event
     reloj: number,
-    evento: string,
+    evento: Evento,
     numeroPedido: number,
     proximoPedido: number,
     pedido: {
