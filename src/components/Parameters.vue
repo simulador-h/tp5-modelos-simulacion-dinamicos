@@ -370,6 +370,9 @@
       tiempoLimiteCobro: number
       tiempoLimiteEspera: number
     }
+    turnos: {
+      duracionTurno: number
+    }
   }
 
   export default defineComponent({
@@ -400,11 +403,13 @@
       watch(
         () => props.parameters,
         () => {
-          const { pedidos, envios, entregas } = _.cloneDeep(props.parameters);
+          const { pedidos, envios, entregas, turnos } = _.cloneDeep(props.parameters);
 
+          console.log('watch:', 'parameters');
           state.pedidos = pedidos;
           state.envios = envios;
           state.entregas = entregas;
+          state.turnos = turnos;
         },
       );
 

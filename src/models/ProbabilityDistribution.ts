@@ -4,7 +4,7 @@ import { es } from 'helpers/locale';
 
 export type TDistributionParameters = Record<string, number>;
 export type TDistributionValidators = Record<string, Array<(value: number) => true | string>>;
-export type TDistributionGenerator = (parameters: TDistributionParameters) => number;
+export type TDistributionGenerator = (parameters: TDistributionParameters) => any;
 
 /**
  * @todo aggregate all parameter-related properties into a single parameter-object definition

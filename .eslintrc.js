@@ -63,7 +63,7 @@ module.exports = {
       exceptAfterSingleLine: true,
     }],
     'max-len': ['error', {
-      'code': 120,
+      'code': 125,
       'comments': 135,
       'ignoreUrls': true,
       'ignoreTemplateLiterals': true,

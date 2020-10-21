@@ -117,6 +117,8 @@
         set: (type) => {
           const distribution = knownDistributions[type];
           emit('input', distribution.clone());
+
+          // console.log('setType:', type); // eslint-disable-line
         },
       }),
       types: _.map(knownDistributions, (
@@ -147,6 +149,8 @@
       () => props.value,
       () => {
         state.configurableDistribution = props.value.clone();
+
+        // console.log('watchValue:', { ...props.value }); // eslint-disable-line
       },
     );
 
