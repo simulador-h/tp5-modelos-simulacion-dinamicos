@@ -59,6 +59,7 @@ module.exports = {
     'brace-style': ['error', 'stroustrup', {
       allowSingleLine: true,
     }],
+    'linebreak-style': 'off',
     'lines-between-class-members': ['error', 'always', {
       exceptAfterSingleLine: true,
     }],
@@ -90,7 +91,7 @@ module.exports = {
     }],
 
     // TypeScript
-    '@typescript-eslint/no-shadow': 'error',
+    // '@typescript-eslint/no-shadow': 'error',
 
     // Imports
     'import/default': 'error',
