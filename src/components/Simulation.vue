@@ -281,6 +281,10 @@
       return `${_.startCase(this.tipo)} (${this.id})`;
     }
 
+    getId() {
+      return this.id;
+    }
+
     iniciarPreparacion(reloj: number, tiempoPreparacion: number) {
       this.estado = EstadoPedido.SiendoPreparado;
       this.inicioPreparacion = reloj;
@@ -1036,14 +1040,21 @@
           required: true,
         },
         {
+          name: 'cantidad-pedido',
+          label: 'P | Cantidad',
+          field: (row: IVectorEstado) => (row.emisor.tipo in TipoPedido
+            ? (row.pedidos && row.pedidos.find(({ id }) => id)?.cantidad) : '-'),
+          align: 'right',
+        },
+        {
           name: 'tiempo-entre-llegadas',
-          label: 'Tiempo entre llegadas',
+          label: 'P | Tiempo entre llegadas',
           field: (row: IVectorEstado) => row.llegadaPedido?.tiempoEntreLlegadas,
           align: 'right',
         },
         {
           name: 'proxima-llegada',
-          label: 'Proxima llegada',
+          label: 'P | Proxima llegada',
           field: (row: IVectorEstado) => row.llegadaPedido?.proximaLlegada,
           align: 'right',
           required: true,
@@ -1070,9 +1081,51 @@
           required: true,
         },
         {
+          name: 'cocinero-1--pedido',
+          label: 'C1 | Nº Pedido',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[0]?.pedidoPreparacion?.getId(),
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'cocinero-1--tiempo-prepa',
+          label: 'C1 | Tiempo preparación',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[0].pedidoPreparacion?.tiempoPreparacion,
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'cocinero-1--prox-fin-at',
+          label: 'C1 | Prox. fin At.',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[0].pedidoPreparacion?.finPreparacion,
+          align: 'right',
+          required: true,
+        },
+        {
           name: 'cocinero-2--estado',
           label: 'C2 | Estado',
           field: (row: IVectorEstado) => row.empleados && row.empleados[1]?.estado,
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'cocinero-2--pedido',
+          label: 'C2 | Nº Pedido',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[1].pedidoPreparacion?.getId(),
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'cocinero-2--tiempo-prepa',
+          label: 'C2 | Tiempo preparación',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[1].pedidoPreparacion?.tiempoPreparacion,
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'cocinero-2--prox-fin-at',
+          label: 'C2 | Prox. fin At.',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[1].pedidoPreparacion?.finPreparacion,
           align: 'right',
           required: true,
         },
@@ -1084,9 +1137,48 @@
           required: true,
         },
         {
+          name: 'cocinero-3--pedido',
+          label: 'C3 | Nº Pedido',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[2].pedidoPreparacion?.getId(),
+          align: 'right',
+        },
+        {
+          name: 'cocinero-3--tiempo-prepa',
+          label: 'C3 | Tiempo preparación',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[3].pedidoPreparacion?.tiempoPreparacion,
+          align: 'right',
+        },
+        {
+          name: 'cocinero-3--prox-fin-at',
+          label: 'C3 | Prox. fin At.',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[3].pedidoPreparacion?.finPreparacion,
+          align: 'right',
+          required: true,
+        },
+        {
           name: 'repartidor--estado',
           label: 'R | Estado',
           field: (row: IVectorEstado) => row.empleados && row.empleados[3]?.estado,
+          align: 'right',
+          required: true,
+        },
+        {
+          name: 'repartidor--pedidos',
+          label: 'R | Nº Pedidos',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[3].pedidosEntrega?.map(({ id }) => id).join(', '),
+          align: 'right',
+        },
+        {
+          name: 'repartidor--tiempo-entrega',
+          label: 'R | Tiempo entrega',
+          field: (row: IVectorEstado) => row.empleados
+            && row.empleados[3]?.pedidosEntrega?.find(({ id }) => id)?.tiempoEntrega,
+          align: 'right',
+        },
+        {
+          name: 'repartidor--prox-fin-at',
+          label: 'R | Prox. fin At.',
+          field: (row: IVectorEstado) => row.empleados && row.empleados[3]?.finEntregaPedidos,
           align: 'right',
           required: true,
         },
